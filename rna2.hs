@@ -6,7 +6,7 @@
 -- | Group a list into chunks of specified size, with
 -- any shortage in the last chunk.
 chunk :: Int -> [a] -> [[a]]
-chunk n ws | length ws <= n = [ws]
+chunk n [] = []
 chunk n ws =
     let (start, rest) = splitAt n ws in
     start : chunk n rest
