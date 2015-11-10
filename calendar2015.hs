@@ -22,7 +22,7 @@ dayNameWords = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
 -- | Group a list into chunks of specified size, with
 -- any shortage in the last chunk.
 chunk :: Int -> [a] -> [[a]]
-chunk n [] = []
+chunk _ [] = []
 chunk n ws =
     let (start, rest) = splitAt n ws in
     start : chunk n rest
