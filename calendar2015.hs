@@ -24,12 +24,10 @@ makeCalendar =
            unlines (map unwords calLines))
           where
             dayNameWords = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
-            group7 :: [String] -> [[String]]
             group7 ws | length ws <= 7 = [ws]
             group7 ws =
                 let (start, rest) = splitAt 7 ws in
                 start : group7 rest
-            dayWords :: [[String]]
             dayWords =
                 group7 (padWords ++ countWords)
                 where
@@ -37,7 +35,7 @@ makeCalendar =
                   countWords =
                       map pad [1..daysThisMonth]
                       where
-                        pad n | n <= 9 = " " ++ show n
+                        pad n | n <= 9 = ' ' : show n
                         pad n = show n
 
 main :: IO ()
