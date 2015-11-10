@@ -1,0 +1,55 @@
+name:                basic-examples
+version:             0.1.0.0
+synopsis:            Self-contained Haskell examples
+
+description:         This collection of beginner-friendly Haskell examples
+                     is based on problems from Gabriel Gonzalez
+                     <http://www.haskellforall.com/2015/10/basic-haskell-examples.html>.
+                     These examples are stand-alone, importing nothing
+                     and using pure Haskell98.                    
+
+homepage:            http://github.com/BartMassey/basic-haskell-examples
+license:             BSD2
+license-file:        COPYING
+author:              Bart Massey
+maintainer:          bart.massey@gmail.com
+copyright:           Copyright (c) 2015 Bart Massey and the respective authors
+-- category:            
+build-type:          Simple
+extra-source-files:  README.md rna.txt
+cabal-version:       >=1.10
+
+executable todo
+  main-is:             todo.hs
+  build-depends:       base >=4.7 && <5
+  default-language:    Haskell98
+  
+executable tabcomma
+  main-is:             tabcomma.hs
+  build-depends:       base >=4.7 && <5
+  default-language:    Haskell98
+
+executable tabcomma2
+  main-is:             tabcomma2.hs
+  build-depends:       base >=4.7 && <5
+  default-language:    Haskell98
+
+executable calendar2015
+  main-is:             calendar2015.hs
+  build-depends:       base >=4.7 && <5
+  default-language:    Haskell98
+  
+executable rna
+  main-is:             rna.hs
+  build-depends:       base >=4.7 && <5
+  default-language:    Haskell98
+  
+executable rna2
+  main-is:             rna2.hs
+  build-depends:       base >=4.7 && <5
+  default-language:    Haskell98
+  
+executable bedtime
+  main-is:             bedtime.hs
+  build-depends:       base >=4.7 && <5
+  default-language:    Haskell98
