@@ -1,5 +1,3 @@
-import Data.List (mapAccumL)
-
 -- | First weekday of 2015, where 0 is Sunday.
 start2015 :: Int
 start2015 = 4
@@ -12,31 +10,40 @@ monthDays = [
  ("July", 31), ("August", 31), ("September", 30),
  ("October", 31), ("November", 30), ("December", 31) ]
 
--- | Actually make the calendar.
-makeCalendar :: String
-makeCalendar =
-    concat (snd (mapAccumL makeMonth start2015 monthDays))
+-- | Two-letter day name abbreviations.
+dayNameWords :: [String]
+dayNameWords = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+
+-- | Group a list into chunks of specified size, with
+-- any shortage in the last chunk.
+chunk :: Int -> [a] -> [[a]]
+chunk n ws | length ws <= n = [ws]
+chunk n ws =
+    let (start, rest) = splitAt n ws in
+    start : chunk n rest
+
+-- | Build the calendar for a given month. Returns
+-- the weekDay1 of the next month and the calendar text.
+makeMonth :: Int -> (String, Int) -> (Int, String)
+makeMonth weekDay1 (monthName, daysThisMonth) =
+    ((weekDay1 + daysThisMonth) `mod` 7,
+     unlines (map unwords calLines))
     where
-      makeMonth weekDay1 (monthName, daysThisMonth) =
-          let calLines = [monthName, "2015"] : dayNameWords :
-                         (dayWords ++ [[]]) in
-          ((weekDay1 + daysThisMonth) `mod` 7,
-           unlines (map unwords calLines))
-          where
-            dayNameWords = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
-            group7 ws | length ws <= 7 = [ws]
-            group7 ws =
-                let (start, rest) = splitAt 7 ws in
-                start : group7 rest
-            dayWords =
-                group7 (padWords ++ countWords)
-                where
-                  padWords = replicate weekDay1 "  "
-                  countWords =
-                      map pad [1..daysThisMonth]
-                      where
-                        pad n | n <= 9 = ' ' : show n
-                        pad n = show n
+      calLines = [monthName, "2015"] : dayNameWords : dayWords ++ [[]]
+      dayWords = chunk 7 (padWords ++ dateWords)
+      padWords = replicate weekDay1 "  "
+      dateWords = map pad [1..daysThisMonth]
+      pad n | n <= 9 = ' ' : show n
+      pad n = show n
+
+-- | Glue together the months to make a whole year.
+-- This should arguably use 'Data.List.mapAccumL' rather
+-- than recursion.
+makeYear :: Int -> [(String, Int)] -> String
+makeYear _ [] = ""
+makeYear weekDay1 (month : months) =
+    let (weekDay1', text) = makeMonth weekDay1 month in
+    text ++ makeYear weekDay1' months
 
 main :: IO ()
-main = putStr makeCalendar
+main = putStr (makeYear start2015 monthDays)

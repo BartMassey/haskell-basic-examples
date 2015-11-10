@@ -1,8 +1,7 @@
 # Basic Haskell Examples
-Copyright &copy; 2015 Bart Massey
 
 The Haskell examples here are intended for beginners. The
-problems are mostly from Gabriel Gonzalez
+problems are from Gabriel Gonzalez
 <http://www.haskellforall.com/2015/10/basic-haskell-examples.html>;
 the solutions are mostly by me.
 
@@ -24,8 +23,25 @@ the solutions are mostly by me.
   Do full TSV->CSV with quoting and escaping.  Requires the
   `ssv` package from Hackage.
 
-* `calendar2015.hs`: Print a 2015 calendar (problem:
+* `calendar2015.hs`: Print 2015 Calendar (problem:
   Gonzalez (#3), solution: Massey)
 
-  Print an ASCII 2015 calendar.
+  Print an ASCII 2015 calendar on standard output.
 
+* `rna.hs`: Decode RNA (problem: Gonzalez (#3), solution:
+  Gonzalez)
+
+  Makes pretty (though verbose) of `deriving` and pattern
+  matching to decode RNA to amino acids using a hard-coded
+  table.
+
+* `rna2.hs`: Decode RNA (problem: Gonzalez (#3), solution:
+  Massey)
+
+  Simple solution using a separate table file `rna.txt`.
+
+* `bedtime.hs`: Bedtime Story (problem: Gonzalez (#3),
+  solution: Massey)
+
+  Madlib-style bedtime story generator exhibiting the use of
+  the list monad and user-defined operators.
