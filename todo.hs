@@ -4,11 +4,11 @@
 -- http://www.haskellforall.com/2015/10/basic-haskell-examples.html
 
 -- | A TODO item is represented by its index and its note.
-newtype ToDo = ToDo (Int, String)
+data ToDo = ToDo Int String
 
 -- | How to turn a TODO item into a 'String'.
 instance Show ToDo where
-    show (ToDo (index, desc)) =
+    show (ToDo index desc) =
         show index ++ ": " ++ desc
 
 -- | The TODO list state is represented by an index of the
@@ -43,14 +43,15 @@ processCommand state = do
     ("+" : desc) ->
         return (Just (state {nextIndex = nextIndex state + 1,
                              items = items state ++
-                                     [ToDo (nextIndex state,
-                                            unwords desc)]}))
+                                     [ToDo
+                                      (nextIndex state)
+                                      (unwords desc)]}))
     ["-", count] -> 
         case reads count of
           [(n, "")] ->
               return (Just (state {items = filter ok (items state)}))
               where
-                ok (ToDo (n0, _)) = n /= n0
+                ok (ToDo n0 _) = n /= n0
           _ -> do
             putStrLn "illegal count"
             return (Just state)
