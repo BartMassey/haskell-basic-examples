@@ -1,3 +1,5 @@
+-- Copyright (c) 2015 Gabriel Gonzalez
+
 data RNA = A | U | C | G
     deriving (Read)
 
