@@ -31,7 +31,8 @@ executable tabcomma
 
 executable tabcomma2
   main-is:             tabcomma2.hs
-  build-depends:       base >=4.7 && <5
+  build-depends:       base >=4.7 && <5,
+                       ssv >= 0.3 && <1
   default-language:    Haskell98
 
 executable calendar2015
