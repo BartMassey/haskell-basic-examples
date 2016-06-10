@@ -59,3 +59,9 @@ executable bedtime
   main-is:             bedtime.hs
   build-depends:       base >=4.7 && <5
   default-language:    Haskell98
+
+executable bedtime2
+  main-is:             bedtime2.hs
+  build-depends:       base >=4.7 && <5
+  default-language:    Haskell98
+
