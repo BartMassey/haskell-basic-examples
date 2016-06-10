@@ -47,6 +47,11 @@ the solutions are mostly by me.
   Madlib-style bedtime story generator exhibiting the use of
   the list monad and user-defined operators.
 
+* `bedtime2.hs`: Bedtime Story (problem: Gonzalez (#5),
+  solution: Massey)
+
+  Uses typeclasses to simplify (?) story writing.
+
 This work is released under the 2-clause BSD license. See
 the file `COPYING` in this distribution for license terms.
 Work by Gabriel Gonzalez is used without express permission.
