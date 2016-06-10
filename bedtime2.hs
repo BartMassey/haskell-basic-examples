@@ -29,7 +29,7 @@ prefixes >>> suffixes = do
 
 -- | Special case for the end of the story.
 fini :: [String]
-fini = ["The End."]
+fini = [""]
 
 -- | Produce a list of all possible stories. This obviously
 -- won't scale well beyond a certain point. (I have used a bit
@@ -47,6 +47,22 @@ stories =
     "found her and" >>> ["saved the day.", "granted her three wishes."] >>>
     fini
 
+-- | Word wrap the story to 60-column lines for readability.
+-- This is pretty gross, and could be cleaned up a bit using
+-- 'Data.List.mapAccumL', but I'm not sure that's better.
+wordWrap :: String -> String
+wordWrap story =
+    unlines $ map unwords $ accum60 0 $ words story
+    where
+      accum60 _ [] = [[]]
+      accum60 n (w : ws) | n' < 60 =
+          (w : l) : ls
+          where
+            n' = n + 1 + length w
+            l : ls = accum60 n' ws
+      accum60 _ (w : ws) =
+          [w] : accum60 0 ws
+
 -- | Pick a story and read it. The user can pick; it would be
 -- straightforward to pick randomly for them.
 main :: IO ()
@@ -55,4 +71,5 @@ main = do
     putStrLn ("Enter a number from 1 to " ++ show len)
     n <- readLn
     putStrLn ""
-    putStrLn (stories !! (n - 1))
+    putStr (wordWrap (stories !! (n - 1)))
+    putStrLn "The End."

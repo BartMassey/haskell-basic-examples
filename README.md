@@ -50,7 +50,9 @@ the solutions are mostly by me.
 * `bedtime2.hs`: Bedtime Story (problem: Gonzalez (#5),
   solution: Massey)
 
-  Uses typeclasses to simplify (?) story writing.
+  Uses typeclasses to simplify (?) story writing. Also
+  word-wraps the story into 60-column lines. Maybe not
+  so "basic".
 
 This work is released under the 2-clause BSD license. See
 the file `COPYING` in this distribution for license terms.
